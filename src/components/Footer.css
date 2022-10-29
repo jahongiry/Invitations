@@ -1,0 +1,11 @@
+.all-footer {
+  font-size: 0.6rem !important;
+
+  background: #6cf;
+}
+
+.main-box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
