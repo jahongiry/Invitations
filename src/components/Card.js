@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./Card.css";
-import { sliceOneActions } from "../store/index";
 import CardOne from "./CardOne";
+import CardTwo from "./CradTwo";
 
 function Card() {
   const card1 = useSelector((state) => state.moveCard.card1);
@@ -10,11 +10,7 @@ function Card() {
   return (
     <div className="mainContainer">
       {card1 && <CardOne />}
-      {card2 && (
-        <div className="square">
-          <button>Card2</button>
-        </div>
-      )}
+      {card2 && <CardTwo />}
     </div>
   );
 }

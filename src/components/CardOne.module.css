@@ -2,9 +2,17 @@
   margin-top: 10rem;
   margin: auto;
   width: 20rem;
-  height: 20rem;
+  height: 23rem;
   border-radius: 60px;
   background: #ffffff;
   box-shadow: 9px 9px 20px #ababab, -9px -9px 20px #ffffff;
   opacity: 0.7;
+}
+
+.title {
+  padding-top: 15px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #1da1f2;
+  letter-spacing: 1px;
 }

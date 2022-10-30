@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import "./Card.css";
+import classes from "./CardOne.module.css";
 import { sliceOneActions } from "../store/index";
 
 function CardOne() {
@@ -11,7 +11,8 @@ function CardOne() {
 
   return (
     <div className="mainContainer">
-      <div className="square">
+      <div className={classes.square}>
+        <div className={classes.title}>Marosim turini tanlang</div>
         <button onClick={moveFirstToSecond}>Card1</button>
       </div>
     </div>
