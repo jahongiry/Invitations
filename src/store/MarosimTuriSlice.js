@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { card1: true, card2: false, marosim: "" };
+const initialState = { card1: true, card2: false, card3: false, marosim: "" };
 
 const MarosimTuriSlice = createSlice({
   name: "addInitialInfo",
@@ -24,6 +24,10 @@ const MarosimTuriSlice = createSlice({
       state.card1 = false;
       state.card2 = true;
       state.marosim = "tugilgan";
+    },
+    moveToThirdCard(state) {
+      state.card1 = false;
+      state.card2 = false;
     },
   },
 });

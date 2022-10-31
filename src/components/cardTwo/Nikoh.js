@@ -1,66 +1,120 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { sliceNikohActions } from "../../store/NikohSlice";
 import "./Nikoh.css";
+import { sliceOneActions } from "../../store/MarosimTuriSlice";
 
 function CardTwoNikoh() {
-  // const dispatch = useDispatch();
-
-  // const moveFirstToSecond = () => {
-  //   dispatch(sliceOneActions.moveCard());
-  // };
+  const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
-  const handleSubmit = (event) => {
-    event.preventDefault(); // from elements property
-    console.log(event.username.value); // or directly
+
+  const [info, setInfo] = useState({
+    kuyov: "",
+    kelin: "",
+    mehmon: "",
+    vaqt: "",
+    viloyat: "",
+    tuman: "",
+    toyxona: "",
+  });
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setInfo({ ...info, [name]: value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(startDate);
+    dispatch(sliceNikohActions.nikohInfo(info));
+    setInfo({
+      kuyov: "",
+      kelin: "",
+      mehmon: "",
+      vaqt: "",
+      viloyat: "",
+      tuman: "",
+      toyxona: "",
+    });
+    dispatch(sliceOneActions.moveToThirdCard());
+    console.log(info);
+  };
+
+  const { kuyov, kelin, mehmon, vaqt, viloyat, tuman, toyxona } = info;
+
   return (
     <div className="mainContainer">
       <button>Nikoh</button>
-      <Form>
+      <form onSubmit={handleSubmit}>
         <input
-          name="username"
-          type="input"
+          name="kuyov"
+          type="text"
           placeholder="Kuyovning ismini kiriting..."
+          value={kuyov}
+          onChange={handleChange}
+          required
         />
-        <input type="input" placeholder="Kelinning ismini kiriting..." />
-        <input type="input" placeholder="Mehmonni ismini kiriting" />
-        <input type="input" placeholder="Nikoh bazmi boshlanish vaqtini:" />
+        <input
+          name="kelin"
+          type="text"
+          value={kelin}
+          onChange={handleChange}
+          required
+          placeholder="Kelinning ismini kiriting..."
+        />
+        <input
+          name="mehmon"
+          type="text"
+          value={mehmon}
+          onChange={handleChange}
+          required
+          placeholder="Mehmonni ismini kiriting"
+        />
+        <input
+          name="vaqt"
+          type="text"
+          value={vaqt}
+          onChange={handleChange}
+          required
+          placeholder="Nikoh bazmi boshlanish vaqtini:"
+        />
         <br />
         <label className="label">
           Viloyatni tanlang:
           <br />
-          <select>
-            <option value="namangan">Namangan</option>
-            <option value="namangan">Toshkent</option>
+          <select name="viloyat" value={viloyat} onChange={handleChange}>
+            <option value="">Tanlang</option>
+            <option value="toshkent">Toshkent</option>
           </select>
         </label>
         <label className="label">
           Tuman yoki Shaharni tanlang:
           <br />
-          <select>
-            <option value="namangan">Namangan</option>
-            <option value="namangan">Uchkurgan</option>
+          <select name="tuman" value={tuman} onChange={handleChange}>
+            <option value="">Tanlang:</option>
+            <option value="uchkurgan">Uchkurgan</option>
           </select>
         </label>
         <label className="label">
           To'xonani tanlang:
           <br />
-          <select>
-            <option value="namangan">Shodiyona</option>
-            <option value="namangan">Bek</option>
+          <select name="toyxona" value={toyxona} onChange={handleChange}>
+            <option value="">Tanlang</option>
+            <option value="bek">Bek</option>
           </select>
         </label>
         <DatePicker
           selected={startDate}
-          onChange={(date: Date) => setStartDate(date)}
+          onChange={(date) => setStartDate(date)}
+          selectsStart
+          startDate={startDate}
         />
-        <button variant="primary" type="submit" onClick={handleSubmit}>
+        <button variant="primary" type="submit">
           Submit
         </button>
-      </Form>
+      </form>
     </div>
   );
 }
